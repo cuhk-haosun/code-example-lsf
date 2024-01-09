@@ -8,10 +8,27 @@
 #BSUB -W 1:00                # Walltime in hours:minutes
 #BSUB -q normal		# use normal queue
 
+#========================
+# Description
+# This is the exmaple code which runs the minimap2 alignment
+# using our docker images which is run by singularity
+#========================
 
 
+
+
+#========================
+# User input
+#========================
 # Define the directory containing your files, don't put "/" at the end
 input_dir="/data/home/grp-sunhao/zx/example/np.human.fastq"
+
+
+
+
+#=================
+# Main code
+#=================
 
 # Get the list of .gz files in the directory
 files=("${input_dir}"/*.gz)
@@ -35,10 +52,6 @@ echo "Maintainer: xing zhao <xingz@link.cuhk.edu.hk>"
 echo "$(date): running on $(cat /etc/hostname)"
 echo "$(date): Starting aligning of $in_file"
 
-
-#==================
-# Main code
-#=================
 
 # Run the container
 /data/home/grp-sunhao/pub/app/singularity exec \
