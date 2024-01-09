@@ -1,0 +1,53 @@
+#!/bin/bash
+#BSUB -J align[1-3]  # Name of the job array with 3 tasks
+#BSUB -oo align.%I.out   # Output log file for each task
+#BSUB -ee align.%I.err   # Error log file for each task
+#BSUB -n 4                   # Number of CPU cores per task
+#BSUB -R "span[ptile=1]"     # Number of CPU cores per host
+#BSUB -M 12000                # Memory limit in MB
+#BSUB -W 1:00                # Walltime in hours:minutes
+#BSUB -q normal		# use normal queue
+
+
+
+# Define the directory containing your files, don't put "/" at the end
+input_dir="/data/home/grp-sunhao/zx/example/np.human.fastq"
+
+# Get the list of .gz files in the directory
+files=("${input_dir}"/*.gz)
+
+# Index for this task in the job array
+index=$((LSB_JOBINDEX))
+
+# Check if the task index is valid
+if [ "$index" -ge "${#files[@]}" ]; then
+  echo "Task index out of range, exiting..."
+  exit 1
+fi
+
+# Get the file for this task
+in_file="${files[$index]}"
+
+
+# Echo log info
+echo "Example job array code"
+echo "Maintainer: xing zhao <xingz@link.cuhk.edu.hk>"
+echo "$(date): running on $(cat /etc/hostname)"
+echo "$(date): Starting aligning of $in_file"
+
+
+#==================
+# Main code
+#=================
+
+# Run the container
+/data/home/grp-sunhao/pub/app/singularity exec \
+ --bind /data/home/grp-sunhao/:/data/home/grp-sunhao/ \
+ /share/home/grp-sunhao/zhaoxing/submit1b1/aligner-minimap2 \
+ minimap2 -x map-ont -t 4 \
+ /data/home/grp-sunhao/zx/refgenome/human/t2t/chm13v2.0.fa \
+ $in_file > $index.paf
+
+
+# Log the completion time
+echo "$(date): Completed alignment of $in_file"

@@ -1,0 +1,14 @@
+INFO:    Converting SIF file to temporary sandbox...
+[M::mm_idx_gen::51.755*1.62] collected minimizers
+[M::mm_idx_gen::62.863*2.01] sorted minimizers
+[M::main::62.863*2.01] loaded/built the index for 25 target sequence(s)
+[M::mm_mapopt_update::65.821*1.97] mid_occ = 892
+[M::mm_idx_stat] kmer size: 15; skip: 10; is_hpc: 0; #seq: 25
+[M::mm_idx_stat::66.877*1.95] distinct minimizers: 100277218 (38.70% are singletons); average occurrences: 5.856; average spacing: 5.308; total length: 3117292070
+[M::worker_pipeline::69.407*2.02] mapped 1141 sequences
+[M::main] Version: 2.26-r1175
+[M::main] CMD: /usr/bin/minimap2 -x map-ont -t 4 /data/home/grp-sunhao/zx/refgenome/human/t2t/chm13v2.0.fa /data/home/grp-sunhao/zx/example/np.human.fastq/fastq_runid_20ec8410d6fcf17c3b8983b028da400dc564086c_1_0.fastq.gz
+[M::main] Real time: 69.560 sec; CPU: 140.183 sec; Peak RSS: 9.891 GB
+INFO:    Cleaning up image...
+INFO:    Converting SIF file to temporary sandbox...
+FATAL:   while preparing image: while handling /share/home/grp-sunhao/zhaoxing/submit1b1/aligner-minimap2.sif: while extracting image: exec: "/sbin/unsquashfs": stat /sbin/unsquashfs: no such file or directory

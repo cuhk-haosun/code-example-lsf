@@ -1,0 +1,2 @@
+bsub<main.lsf
+bjobs
